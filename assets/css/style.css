@@ -1,0 +1,278 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+    --bk-color: #b9b189;
+    --bk-color-cr: #e5e1e2;
+    --bk-gradient-one: #6799a6;
+    --bk-gradient-two: #f4eaf0;
+    --bk-gradient-thre: #ccc994;
+    --txt-color-ge: #DA3466;
+    --txt-color-ge-ky-btn: #DCDDD8;
+    --bk-color-ge-ky-btn: #004A6D;
+    --txt-color-ge-ky-btn-hr: #4CC6F4;
+    --txt-color: #000;
+    --txt-color-we: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+body {
+    display: flex;
+    overflow-y: hidden;
+    padding: 0 10px;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: linear-gradient(to left top, var(--bk-gradient-one), var(--bk-gradient-two), var(--bk-gradient-thre));
+}
+
+footer {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    margin-top: auto;
+}
+
+/* Estiliza a container como um flex container em coluna, com espaçamento, padding, cor de fundo, borda arredondada, 
+sombra e espaçamento entre os elementos internos. */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 850px;
+    height: 750px;
+    gap: 20px;
+    padding: 60px 40px;
+    background: var(--bk-color-cr);
+    border-radius: 10px;
+    /* align-items: flex-end; */
+    justify-content: space-between;
+    box-shadow: 0 0 10px 4px #d0d3d35b;
+    /* min-height: calc(100vh - auto); */
+}
+
+/* Estiliza a caixa do jogo da forca como flex em coluna, centrando itens; define estilos para a imagem e o título, 
+incluindo tamanho, alinhamento e formatação de texto. */
+.hangman-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hangman-box img {
+    user-select: none;
+    max-width: 270px;
+    text-align: center;
+}
+
+.hangman-box h1 {
+    font-size: 1.45rem;
+    text-align: center;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+/* Exibição da palavra com espaço entre letras, alinhamento central e layout flexível, com estilos específicos para letras adivinhadas, 
+removendo a borda e ajustando margens. */  
+.game-box .word-display {
+    gap: 10px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 10px;
+
+}
+
+.word-display .letter {
+    width: 28px;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    border-bottom: 3px solid var(--txt-color);
+    height: 10px;
+
+}
+
+.word-display .letter.guessed {
+    margin: -40px 0 35px;
+    border-color: transparent;
+    height: 20px;
+}
+
+/* Estiliza o título e o texto de tentativas com alinhamento, tamanhos e peso da fonte; 
+define o layout da área do teclado como flexível, com espaçamento, quebra de linhas e centralização. */
+.game-box h4 {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.game-box h4 b {
+    font-weight: 600;
+}
+
+.game-box .guesses-text b {
+    color: var(--txt-color-ge);
+}
+
+.game-box .keyboard {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+/* Estiliza botões dentro de .game-modal e .keyboard com cor de texto, sem borda, cursor pointer, 
+tamanho e peso da fonte, borda arredondada, texto em maiúsculo e fundo colorido. */
+:where(.game-modal, .keyboard) button {
+    color: var(--txt-color-ge-ky-btn);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    text-transform: uppercase;
+    background: var(--bk-color-ge-ky-btn);
+}
+
+/* Estiliza os botões do teclado com padding e largura proporcional; 
+botões desativados ficam com opacidade reduzida e não respondem a eventos de clique. */
+.keyboard button {
+    padding: 7px;
+    width: calc(100% / 9 - 5px);
+}
+
+.keyboard button[disabled] {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Define o estilo de botões ao passar o mouse dentro de .game-modal e .keyboard, alterando fundo e cor do texto para destaque. */
+:where(.game-modal, .keyboard) button:hover {
+    background: var(--txt-color-ge-ky-btn-hr);
+    color: var(--txt-color)
+}
+
+/* Estiliza a modal do jogo como uma sobreposição fixa, centralizando seu conteúdo com fundo semi-transparente, 
+inicialmente invisível e sem interatividade; possui transição para opacidade suave. */
+.game-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    background: #00000099;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 0 10px;
+    transition: opacity 0.4s ease;
+}
+
+/* Estiliza a modal com opacidade visível e retorno à interatividade ao receber a classe show, com transição suave; 
+define o conteúdo centralizado, com padding, fundo, borda arredondada e sombra; ajusta imagens, títulos, textos e botões dentro da modal. */
+.game-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.4s 0.4s ease;
+}
+
+.game-modal .content {
+    padding: 30px;
+    max-width: 420px;
+    width: 100%;
+    border-radius: 10px;
+    background: var(--bk-color-cr);
+    text-align: center;
+    box-shadow: 0 10px 20px #0000001a;
+}
+
+.game-modal img {
+    max-width: 130px;
+    margin-bottom: 20px;
+}
+
+.game-modal img[src="../victory.gif"] {
+    margin-left: -10px;
+}
+
+.game-modal h4 {
+    font-size: 1.53rem;
+}
+
+.game-modal p {
+    font-size: 1.15rem;
+    margin: 15px 0 30px;
+    font-weight: 500;
+}
+
+.game-modal p b {
+    color: var(--bk-color-ge-ky-btn);
+    font-weight: 600;
+}
+
+.game-modal button {
+    padding: 12px 23px;
+}
+
+/* Estilos específicos para telas menores que 782px, ajustando layout, 
+tamanhos de imagens e fontes, ocultando elementos e reduzindo padding para melhor adaptação em dispositivos móveis. */
+@media (max-width: 782px) {
+    .container {
+        flex-direction: column;
+        padding: 30px 15px;
+        align-items: center;
+    }
+
+    .hangman-box img {
+        max-width: 200px;
+    }
+
+    .hangman-box h1 {
+        display: none;
+    }
+
+    .game-box h4 {
+        font-size: 1rem;
+    }
+
+    .word-display .letter {
+        margin-bottom: 35px;
+        font-size: 1.7rem;
+    }
+
+    .word-display .letter.guessed {
+        margin: -35px 0 25px;
+    }
+
+    .game-modal img {
+        max-width: 120px;
+    }
+
+    .game-modal h4 {
+        font-size: 1.45rem;
+    }
+
+    .game-modal p {
+        font-size: 1.1rem;
+    }
+
+    .game-modal button {
+        padding: 10px 18px;
+    }
+}

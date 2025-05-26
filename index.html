@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca</title>
+    <link rel="shortcut icon" href="./assets/image/gesture_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!-- \aqui tem dois link de java script, um cara as funcionalidades e o outro para as perguntas-->
+    <script src="./assets/js/word-list.js" defer></script>
+    <script src="./assets/js/script.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- essa é a classificação do pop out que aparecera na tela pós resultado do jogo -->
+
+    <div class="game-modal">
+
+        <!-- Dentro dele, a div com a classe content centraliza as informações. Ele exibe uma imagem/GIF, 
+         um título indicando que o jogador perdeu, uma mensagem revelando a palavra correta, 
+         e um botão para jogar novamente. -->
+
+        <div class="content">
+            <img src="#" alt="gif">
+            <h4>Perdeu o Jogo!</h4>
+            <p>A palavra correta será: <b>Arco-Ìris</b></p>
+            <button class="play-again">Vamos Jogar !?</button>
+        </div>
+
+    </div>
+
+    <!-- Um contêiner principal que envolve todo o conteúdo, ajudando na organização e no estilo da página. -->
+
+    <div class="container">
+
+        <!-- A class "hangma-box" é uma caixa específica para o jogo da forca, 
+         dentro tem o link das imagens que estrutam o jogo da forca, com o nome proprio do jogo-->
+
+        <div class="hangman-box">
+
+            <img src="#" draggable="false" alt="hangman-img">
+            <h1>Jogo da Forca Vocação</h1>
+        </div>
+
+        <!-- aqui ficara a caixa de conteudo principal usando o game-blox -->
+
+        <div class="game-box">
+
+        <!-- aqui é macado com caixas, uma caixa para a tela de jogo, uma fazendo a contagem de tentativas
+          e tentativas incorretas e uma cixa para um teclado dentro do jogo -->
+
+            <ul class="word-display"></ul>
+            <h4 class="hint-text">Tentativas: <b></b></h4>
+            <h4 class="guesses-text">Tentativas Incorretas: <b></b></h4>
+            <div class="keyboard"></div>
+        </div>
+
+        <div>
+
+            <!-- Este código cria um rodapé na página com a mensagem e a identificação de quem fez o codigo-->
+
+            <footer>
+                <p>Criado por @nskmarques Vocação 2025 &copy;</p>
+            </footer>
+        </div>
+    </div>
+
+
+</body>
+
+
+</html>
